@@ -26,8 +26,8 @@ def preprocesses():
     data = df1.values
     X = data[:, 1:]  
     y = data[:, 0]
-    X_train, X_test, y_train, y_test = train_test_split(X, y,train_size=0.0075,test_size=0.0025, random_state=42)
-
+    X_train, X_test, y_train, y_test = train_test_split(X, y,train_size=0.075,test_size=0.025, random_state=42)
+    from sklearn.model_selection import LeaveOneOut
     scaler = StandardScaler()
     scaler.fit(X_train)
     X_train = scaler.transform(X_train)

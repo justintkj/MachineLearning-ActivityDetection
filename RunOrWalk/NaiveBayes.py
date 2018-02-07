@@ -33,4 +33,8 @@ def NBprocess():
     print ("Accuracy for Gaussian Naive Bayes: {}".format(pred_nb))
     print ("Time taken for Naive Bayes: {}".format(time.time()-start_time))
 
+
     return time.time()-start_time, pred_nb
+
+
+
