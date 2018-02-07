@@ -15,16 +15,22 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.naive_bayes import GaussianNB
 from nb_author_id import preprocesses
 
-X_train, X_test, y_train, y_test = preprocesses()
-# instantiate the estimator
-nb = GaussianNB()
+import time
+def NBprocess():
+    start_time = time.time()
+    X_train, X_test, y_train, y_test = preprocesses()
+    # instantiate the estimator
+    nb = GaussianNB()
 
-# fit the model
-nb.fit(X_train, y_train)
+    # fit the model
+    nb.fit(X_train, y_train)
 
-# predict the response
-y_pred = nb.predict(X_test)
+    # predict the response
+    y_pred = nb.predict(X_test)
 
-# accuracy score
-pred_nb = metrics.accuracy_score(y_test, y_pred)
-print ("Accuracy for Gaussian Naive Bayes: {}".format(pred_nb))
+    # accuracy score
+    pred_nb = metrics.accuracy_score(y_test, y_pred)
+    print ("Accuracy for Gaussian Naive Bayes: {}".format(pred_nb))
+    print ("Time taken for Naive Bayes: {}".format(time.time()-start_time))
+
+    return time.time()-start_time, pred_nb

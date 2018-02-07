@@ -11,25 +11,26 @@ from sklearn.metrics import auc
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
     
-##Naive Bayes
-from sklearn.neighbors import KNeighborsClassifier
+##Random Forest
+from sklearn.ensemble import RandomForestClassifier
 from nb_author_id import preprocesses
-def KNNprocess():
+def RFprocess():
     X_train, X_test, y_train, y_test = preprocesses()
     import time
     start_time = time.time()
     # instantiate the estimator
-    knn = KNeighborsClassifier()
+    clf = RandomForestClassifier(random_state=1)
 
     # fit the model
-    knn.fit(X_train, y_train)
+    clf.fit(X_train, y_train)
 
     # predict the response
-    y_pred = knn.predict(X_test)
+    y_pred = clf.predict(X_test)
 
     # accuracy score
-    pred_knn = metrics.accuracy_score(y_test, y_pred)
-    print ("Accuracy for Knn: {}".format(pred_knn))
-    print ("Time taken for knn: {}".format(time.time()-start_time))
+    pred_rf = metrics.accuracy_score(y_test, y_pred)
+    print ("Accuracy for RandomForest: {}".format(pred_rf))
+    print ("Time taken for RandomForest: {}".format(time.time()-start_time))
 
-    return time.time()-start_time, pred_knn
+    return time.time()-start_time, pred_rf
+
