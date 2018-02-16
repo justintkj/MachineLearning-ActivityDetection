@@ -14,21 +14,23 @@ from sklearn.preprocessing import StandardScaler
 ##Random Forest
 from sklearn.ensemble import RandomForestClassifier
 from nb_author_id import preprocesses
+from KFold import KFoldalgo
 def RFprocess():
-    X_train, X_test, y_train, y_test = preprocesses()
+    X_list, y_list = preprocesses()
     import time
     start_time = time.time()
     # instantiate the estimator
     clf = RandomForestClassifier(random_state=1)
-
+    kfold_acc = KFoldalgo(X_list,y_list,clf)
+    pred_rf = kfold_acc
     # fit the model
-    clf.fit(X_train, y_train)
+    #clf.fit(X_train, y_train)
 
     # predict the response
-    y_pred = clf.predict(X_test)
+    #y_pred = clf.predict(X_test)
 
     # accuracy score
-    pred_rf = metrics.accuracy_score(y_test, y_pred)
+    #pred_rf = metrics.accuracy_score(y_test, y_pred)
     print ("Accuracy for RandomForest: {}".format(pred_rf))
     print ("Time taken for RandomForest: {}".format(time.time()-start_time))
 

@@ -14,22 +14,24 @@ from sklearn.preprocessing import StandardScaler
 ##Naive Bayes
 from sklearn.naive_bayes import GaussianNB
 from nb_author_id import preprocesses
+from KFold import KFoldalgo
 
 import time
 def NBprocess():
     start_time = time.time()
-    X_train, X_test, y_train, y_test = preprocesses()
+    X_list, y_list = preprocesses()
     # instantiate the estimator
     nb = GaussianNB()
 
     # fit the model
-    nb.fit(X_train, y_train)
-
+    kfold_acc = KFoldalgo(X_list,y_list,nb)
+    pred_nb = kfold_acc
+    
     # predict the response
-    y_pred = nb.predict(X_test)
+    #y_pred = nb.predict(X_test)
 
     # accuracy score
-    pred_nb = metrics.accuracy_score(y_test, y_pred)
+    #pred_nb = metrics.accuracy_score(y_test, y_pred)
     print ("Accuracy for Gaussian Naive Bayes: {}".format(pred_nb))
     print ("Time taken for Naive Bayes: {}".format(time.time()-start_time))
 

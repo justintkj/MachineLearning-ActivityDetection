@@ -14,21 +14,23 @@ from sklearn.preprocessing import StandardScaler
 ##Naive Bayes
 from sklearn.neighbors import KNeighborsClassifier
 from nb_author_id import preprocesses
+from KFold import KFoldalgo
 def KNNprocess():
-    X_train, X_test, y_train, y_test = preprocesses()
+    X_list, y_list = preprocesses()
     import time
     start_time = time.time()
     # instantiate the estimator
     knn = KNeighborsClassifier()
-
+    kfold_acc = KFoldalgo(X_list, y_list, knn)
+    pred_knn = kfold_acc
     # fit the model
-    knn.fit(X_train, y_train)
+    #knn.fit(X_train, y_train)
 
     # predict the response
-    y_pred = knn.predict(X_test)
+    #y_pred = knn.predict(X_test)
 
     # accuracy score
-    pred_knn = metrics.accuracy_score(y_test, y_pred)
+    #pred_knn = metrics.accuracy_score(y_test, y_pred)
     print ("Accuracy for Knn: {}".format(pred_knn))
     print ("Time taken for knn: {}".format(time.time()-start_time))
 

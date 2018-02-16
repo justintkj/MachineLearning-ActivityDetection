@@ -41,17 +41,20 @@ for x in range(0, len(X_train)):
 data = (g1,g2)
 data2 = (g3,g4)
 data3 = (g5,g6)
-colors = ("red","green","blue")
+colors = ("red","green")
 groups = ("walk", "run")
 for data,data2,data3, color, group in zip(data,data2,data3, colors, groups):
     xs = data
     ys = data2
     zs = data3
     #ax.scatter(x, y alpha=0.8, c=color, edgecolors='none', s=30, label=group)
-    ax.scatter(xs, ys, zs, zdir='z', s=20, c=None, depthshade=True)
+    ax.scatter(xs, ys, zs, zdir='z', s=20, c=color,label = group, depthshade=True)
 
-plt.title('Matplot scatter plot')
+plt.title('Scatter plot for Run/Walk')
 plt.legend(loc=2)
+ax.set_xlabel('AccelerometerX')
+ax.set_ylabel('AccelerometerY')
+ax.set_zlabel('AccelerometerZ')
 plt.show()
 
 
