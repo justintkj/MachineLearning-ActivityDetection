@@ -25,16 +25,19 @@ def preprocesses():
     from sklearn.model_selection import train_test_split
     from sklearn.preprocessing import StandardScaler
     from sklearn import preprocessing
-    
+    from math import ceil    
     data = df1.values
-    X = data[:, 1:]
-    y = data[:, 0]
+    total_sample = len(data)
+    portion = 1
+    X = data[0:int(total_sample*portion), 1:]
+    y = data[0:int(total_sample*portion), 0]
     #segment the data by window size and overlap
     window_size = 50;
     overlap = 25;
     segment = []
     labels = []
-    for i in range(len(data)/overlap):
+    print len(X)
+    for i in range(len(X)/overlap):
         segment.append(X[i*overlap:((i*overlap)+(window_size)), 0:])        
         labels.append(y[i*overlap:((i*overlap)+(window_size))])    
     stat_list = []

@@ -19,7 +19,7 @@ from sklearn.ensemble import RandomForestClassifier
 from nb_author_id import preprocesses
 
 X_list, y_list = preprocesses()
-clf = RandomForestClassifier()
+clf = RandomForestClassifier(random_state = 1)
 #fit the model
 clf.fit(X_list,y_list)
 

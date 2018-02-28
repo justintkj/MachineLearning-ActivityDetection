@@ -4,6 +4,7 @@ from sklearn import metrics
 # import metrics we'll need
 from sklearn.metrics import accuracy_score  
 import numpy as np
+import timeit
 
 def KFoldalgo(X_list, y_list, trainer):
     kf = KFold(n_splits = 50)
@@ -19,4 +20,10 @@ def KFoldalgo(X_list, y_list, trainer):
         pred_val = metrics.accuracy_score(y_test, y_pred)
         final_accuracy = final_accuracy + pred_val
         count = count +1
+    trainer.fit(X_list, y_list)
+    sample_data = X_list[0:1, 0:]
+    start_time = timeit.default_timer()
+    pred_one = trainer.predict(sample_data)
+    total_time = (timeit.default_timer() - start_time)*1000
+    print ("Time taken for one prediction: {0:.50f}".format(total_time))
     return final_accuracy/ count
