@@ -1,5 +1,6 @@
 ##### imports
 import sklearn
+import timeit
 from sklearn import metrics
 # import metrics we'll need
 from sklearn.metrics import accuracy_score  
@@ -15,6 +16,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from nb_author_id import preprocesses
 from KFold import KFoldalgo
+from loo import looalgo
+from ConfusionMatrix import confusionMatrixAlgo 
+
 def KNNprocess():
     X_list, y_list = preprocesses()
     import time
@@ -22,7 +26,15 @@ def KNNprocess():
     # instantiate the estimator
     knn = KNeighborsClassifier()
     kfold_acc = KFoldalgo(X_list, y_list, knn)
-    pred_knn = kfold_acc
+    end_time = time.time()                          #considers the run-time only while using KFold and not loo
+    pred_knn_kfold = kfold_acc
+    loo_acc = looalgo(X_list, y_list, knn)
+    pred_knn_loo = loo_acc
+    
+    # Confusion Matrix
+    knn.fit(X_list, y_list)
+    y_pred = knn.predict(X_list)
+    con_matrix = confusionMatrixAlgo(y_list, y_pred)
     # fit the model
     #knn.fit(X_train, y_train)
 
@@ -31,7 +43,9 @@ def KNNprocess():
 
     # accuracy score
     #pred_knn = metrics.accuracy_score(y_test, y_pred)
-    print ("Accuracy for Knn: {}".format(pred_knn))
-    print ("Time taken for knn: {}".format(time.time()-start_time))
+    print ("Accuracy for Knn using KFold Cross Validation: {}".format(pred_knn_kfold))
+    print ("Accuracy for Knn using Leave One Out Cross Validation: {}".format(pred_knn_loo))
+    print ("Time taken for knn using: {}".format(end_time-start_time))
 
-    return time.time()-start_time, pred_knn
+
+    return time.time()-start_time, pred_knn_kfold, pred_knn_loo

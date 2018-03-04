@@ -4,7 +4,7 @@ import pandas as pd
 import scipy as sc
 
 def preprocesses():
-    df=pd.read_csv('../input/dataset.csv', na_values = "?")
+    df=pd.read_csv('../input/dataset_short.csv', na_values = "?")
     df.dropna(inplace=True)
     df.index = np.arange(1, len(df)+1)
     df.corr()

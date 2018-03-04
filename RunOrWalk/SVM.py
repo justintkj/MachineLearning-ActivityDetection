@@ -16,6 +16,8 @@ def SVMprocess():
     from sklearn.svm import SVC
     from nb_author_id import preprocesses
     from KFold import KFoldalgo
+    from loo import looalgo
+    from ConfusionMatrix import confusionMatrixAlgo 
 
     X_list, y_list = preprocesses()
     # instantiate time
@@ -27,13 +29,22 @@ def SVMprocess():
     # fit the model
     #svm.fit(X_train, y_train)
     kfold_acc = KFoldalgo(X_list,y_list,svm)
-    pred_svm = kfold_acc
+    pred_svm_kfold = kfold_acc
+    end_time = time.time()                          #considers the run-time only while using KFold and not loo    
+    loo_acc = looalgo(X_list, y_list, svm)
+    pred_svm_loo = loo_acc
+
+    # Confusion Matrix
+    svm.fit(X_list, y_list)
+    y_pred = svm.predict(X_list)
+    con_matrix = confusionMatrixAlgo(y_list, y_pred)
     # predict the response
     #y_pred = svm.predict(X_test)
 
     # accuracy score
     #pred_svm = metrics.accuracy_score(y_test, y_pred)
-    print ("Accuracy for SVM: {}".format(pred_svm))
-    print ("Time taken for SVM: {}".format(time.time()-start_time))
+    print ("Accuracy for SVM Using KFold Cross Validation: {}".format(pred_svm_kfold))
+    print ("Accuracy for SVM Using Leave One Out Cross Validation: {}".format(pred_svm_loo))
+    print ("Time taken for SVM: {}".format(end_time-start_time))
 
-    return time.time()-start_time, pred_svm
+    return time.time()-start_time, pred_svm_kfold, pred_svm_loo
