@@ -7,6 +7,7 @@ import numpy as np
 import timeit
 
 def KFoldalgo(X_list, y_list, trainer):
+    start_time_kfold = timeit.default_timer()
     #num split selected as 50.
     kf = KFold(n_splits = 50)
     kf.get_n_splits(X_list)
@@ -23,15 +24,14 @@ def KFoldalgo(X_list, y_list, trainer):
         #Sum the prediction up, to find average later.
         final_accuracy = final_accuracy + pred_val
         count = count +1
-
-        
     trainer.fit(X_list, y_list)
-
+    total_time_kfold = (timeit.default_timer() - start_time_kfold)*1000
     #sample first 1st set of data(50 sampling points)
     sample_data = X_list[0:1, 0:]
     start_time = timeit.default_timer()
     pred_one = trainer.predict(sample_data)
     total_time = (timeit.default_timer() - start_time)*1000
+    print ("***************************************************")
     print ("Time taken for one prediction in ms: {0:.50f}".format(total_time))
     print ("Prediction for current algorithm, 1st window(0 = Walk, 1 = Jog, 2 = Run): {}".format(pred_one))
     print ("label for current algorithm, 1st window: [{}]".format(y_list[0]))
@@ -47,6 +47,6 @@ def KFoldalgo(X_list, y_list, trainer):
     pred_three = trainer.predict(sample_data)
     print ("Prediction for current algorithm, 30th window(0 = Walk, 1 = Jog, 2 = Run): {}".format(pred_three))
     print ("label for current algorithm, 30th window: [{}]".format(y_list[29]))
-
+    print ("Total time taken for Kfold algo in ms : [{}]".format(total_time_kfold))
     #returns accuracy average
     return final_accuracy/ count

@@ -44,7 +44,6 @@ def RFprocess():
     #pred_rf = metrics.accuracy_score(y_test, y_pred)
     print ("Accuracy for RandomForest Using KFold Cross Validation: {}".format(pred_rf_kfold))
     print ("Accuracy for RandomForest Using Leave One Out Cross Validation: {}".format(pred_rf_loo))
-    print ("Time taken for RandomForest: {}".format(end_time-start_time))
+    #print ("Time taken for RandomForest: {}".format(end_time-start_time))
 
     return time.time()-start_time, pred_rf_kfold, pred_rf_loo
-

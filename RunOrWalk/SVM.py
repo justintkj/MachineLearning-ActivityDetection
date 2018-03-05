@@ -45,6 +45,6 @@ def SVMprocess():
     #pred_svm = metrics.accuracy_score(y_test, y_pred)
     print ("Accuracy for SVM Using KFold Cross Validation: {}".format(pred_svm_kfold))
     print ("Accuracy for SVM Using Leave One Out Cross Validation: {}".format(pred_svm_loo))
-    print ("Time taken for SVM: {}".format(end_time-start_time))
+    #print ("Time taken for SVM: {}".format(end_time-start_time))
 
     return time.time()-start_time, pred_svm_kfold, pred_svm_loo

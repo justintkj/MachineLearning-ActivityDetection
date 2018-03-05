@@ -45,7 +45,7 @@ def KNNprocess():
     #pred_knn = metrics.accuracy_score(y_test, y_pred)
     print ("Accuracy for Knn using KFold Cross Validation: {}".format(pred_knn_kfold))
     print ("Accuracy for Knn using Leave One Out Cross Validation: {}".format(pred_knn_loo))
-    print ("Time taken for knn using: {}".format(end_time-start_time))
+    #print ("Time taken for knn using: {}".format(end_time-start_time))
 
 
     return time.time()-start_time, pred_knn_kfold, pred_knn_loo

@@ -43,7 +43,7 @@ def NBprocess():
     #pred_nb = metrics.accuracy_score(y_test, y_pred)
     print ("Accuracy for Gaussian Naive Bayes using KFold Cross Validation: {}".format(pred_nb_kfold))
     print ("Accuracy for Gaussian Naive Bayes using Leave One Out Cross Validation: {}".format(pred_nb_loo))
-    print ("Time taken for Naive Bayes: {}".format(end_time-start_time))
+    #print ("Time taken for Naive Bayes: {}".format(end_time-start_time))
 
 
     return time.time()-start_time, pred_nb_kfold, pred_nb_loo

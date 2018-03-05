@@ -12,4 +12,4 @@ def confusionMatrixAlgo(y_true, y_pred):
 	y_pred = pd.Series(y_pred, name = 'Predicted')
 	df_confusion = pd.crosstab(y_actu, y_pred, rownames = ['Actual'], colnames = ['Predicted'], margins = True)
 	print df_confusion
-	# If you look at the output for this ^, sometimes the middle row is missing. lol
+        # If you look at the output for this ^, sometimes the middle row is missing. lol

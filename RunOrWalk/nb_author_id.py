@@ -4,7 +4,7 @@ import pandas as pd
 import scipy as sc
 
 def preprocesses():
-    df=pd.read_csv('../input/dataset_short.csv', na_values = "?")
+    df=pd.read_csv('../input/dataset.csv', na_values = "?")
     df.dropna(inplace=True)
     df.index = np.arange(1, len(df)+1)
     df.corr()
@@ -28,7 +28,7 @@ def preprocesses():
     from math import ceil    
     data = df1.values
     total_sample = len(data)
-    portion = 1
+    portion = 0.1
     #Sample data are from 2nd column onwards
     X = data[0:int(total_sample*portion), 1:]
     #Labels are given only in the first column
